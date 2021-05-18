@@ -1,0 +1,41 @@
+import pandas as pd
+import numpy as np
+from sklearn.neighbors import NearestCentroid
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+df = pd.read_csv("BRCA_pam50.tsv", sep="\t", index_col=0)
+X = df.iloc[:, :-1].to_numpy()
+y = df["Subtype"].to_numpy()
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, stratify=y, test_size=0.2, random_state=17
+)
+
+model = NearestCentroid()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print(accuracy_score(y_pred, y_test))
+
+unique_array, count_array = np.unique(y_pred, return_counts=True) #находит уникальные элементы
+# массива и возвращает их в отсортированном массиве и выводит количество вхождений
+
+Result = pd.DataFrame([zeros, count_array, zeros], 
+                      index=['Совпадения', 'Всего', 'Точность предсказаний'], columns=unique_array)
+
+a = 0
+for i in y_pred:
+  if i == y_test[a]:
+    Result.loc['Совпадения', i] += 1
+  a+=1
+Result.loc['Точность предсказаний', :] = Result.loc['Совпадения', :]/Result.loc['Всего', :]
+print(Result.T)
+
+0.8907103825136612
+                 Совпадения  Всего  Точность предсказаний
+HER2-enriched          13.0   14.0               0.928571
+Healthy                18.0   19.0               0.947368
+Luminal A              67.0   70.0               0.957143
+Luminal B              35.0   44.0               0.795455
+Normal-like             3.0    9.0               0.333333
+Triple-negative        27.0   27.0               1.000000
