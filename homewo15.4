@@ -1,0 +1,17 @@
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X = np.array([[0.01], [0.02], [0.03], [0.04]])
+y = np.array([1, 1, 2, 2]) 
+
+model = KNeighborsClassifier(n_neighbors=3, p=1)
+model.fit(X, y)
+y_pred = model.predict([[0.022]])
+print(y_pred)
+
+model1 = KNeighborsClassifier(n_neighbors=3, p=2)
+model1.fit(X, y)
+y_pred1 = model1.predict([[0.055]])
+print(y_pred1)
