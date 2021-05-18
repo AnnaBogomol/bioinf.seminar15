@@ -3,15 +3,18 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-X = np.array([[0.01], [0.02], [0.03], [0.04]])
-y = np.array([1, 1, 2, 2]) 
+X = np.array([[8, 4], [7, 5]])
+y = np.array([1, 2]) 
 
-model = KNeighborsClassifier(n_neighbors=3, p=1)
+model = KNeighborsClassifier(n_neighbors=1, p=1)
 model.fit(X, y)
-y_pred = model.predict([[0.022]])
+y_pred = model.predict([[0, 0]])
 print(y_pred)
 
-model1 = KNeighborsClassifier(n_neighbors=3, p=2)
+model1 = KNeighborsClassifier(n_neighbors=1, p=2)
 model1.fit(X, y)
-y_pred1 = model1.predict([[0.055]])
+y_pred1 = model1.predict([[0, 0]])
 print(y_pred1)
+
+Result: [1]
+        [2]
